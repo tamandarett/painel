@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Operações - Tamandaré Tintas</title>
+    <title>Painel Rápido - Tamandaré Tintas</title>
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="stylev2.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -25,12 +25,6 @@
             </button>
             <button class="nav-btn" data-target="view-lacres">
                 <i class="fa-solid fa-stamp"></i> Registro de Lacres
-            </button>
-            <button class="nav-btn" data-target="view-caixa">
-                <i class="fa-solid fa-calculator"></i> Registro de Caixa
-            </button>
-            <button class="nav-btn" data-target="view-cadesp">
-                <i class="fa-solid fa-magnifying-glass"></i> Consulta CADESP
             </button>
         </nav>
 
@@ -53,32 +47,87 @@
         <div class="view-container">
             
             <div id="view-home" class="view active home-view">
-                <div class="grid-layout">
-                    <div class="card">
+                
+                <div class="dashboard-grid">
+                    
+                    <div class="card links-card">
                         <div class="card-header">
-                            <h3><i class="fa-solid fa-link"></i> Links Externos</h3>
+                            <h3><i class="fa-solid fa-link"></i> Links Essenciais</h3>
                         </div>
-                        <ul class="link-list">
-                            <li><a href="https://www.aciai.com.br/" target="_blank">ACIAI</a></li>
-                            <li><a href="https://protestosp.com.br/" target="_blank">CENPROT</a></li>
-                            <li><a href="https://www.sintegra.gov.br/" target="_blank">SINTEGRA</a></li>
-                            <li><a href="https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/cnpjreva_solicitacao.asp" target="_blank">Consulta CNPJ</a></li>
-                            <li><a href="https://banco.bradesco/html/classic/produtos-servicos/mais-produtos-servicos/segunda-via-boleto.shtm" target="_blank">2ª Via Boleto Bradesco</a></li>
-                            <li><a href="https://drive.google.com/drive/folders/1Bb5c4ULT6W4IRfHjOFZsxuY9Czh-lhxM" target="_blank">Docs Diversos</a></li>
-                        </ul>
+                        <div class="card-content">
+                            <ul class="link-grid">
+                                <li>
+                                    <a href="https://www.aciai.com.br/" target="_blank">
+                                        <div class="link-icon"><i class="fa-solid fa-building"></i></div>
+                                        <span>ACIAI</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://protestosp.com.br/" target="_blank">
+                                        <div class="link-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                                        <span>CENPROT</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.sintegra.gov.br/" target="_blank">
+                                        <div class="link-icon"><i class="fa-solid fa-receipt"></i></div>
+                                        <span>SINTEGRA</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/cnpjreva_solicitacao.asp" target="_blank">
+                                        <div class="link-icon"><i class="fa-solid fa-id-card"></i></div>
+                                        <span>Consulta CNPJ</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://banco.bradesco/html/classic/produtos-servicos/mais-produtos-servicos/segunda-via-boleto.shtm" target="_blank">
+                                        <div class="link-icon"><i class="fa-solid fa-barcode"></i></div>
+                                        <span>2ª Via Boleto</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://drive.google.com/drive/folders/1Bb5c4ULT6W4IRfHjOFZsxuY9Czh-lhxM" target="_blank">
+                                        <div class="link-icon"><i class="fa-solid fa-book"></i></div>
+                                        <span>Docs Diversos</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
+                    <div class="card todo-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-list-check"></i> Tarefas</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="todo-input-container">
+                                <input type="text" id="todo-input" placeholder="Nova tarefa...">
+                                <button id="add-todo-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <ul id="todo-list" class="todo-list"></ul>
+                            <button class="btn-clean" id="clear-todos-btn">Limpar Concluídas</button>
+                        </div>
                     </div>
+
+                    <div class="card calendar-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-calendar-days"></i> Agenda</h3>
+                        </div>
+                        <div class="card-content iframe-container">
+                            <iframe src="https://calendar.google.com/calendar/embed?src=f1c3916472d8e68fcdfc9d16dfbc294e026659b33b8e6c1fe6d3c9fb46f96d32%40group.calendar.google.com&ctz=America%2FSao_Paulo"></iframe>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <iframe id="view-pix" class="view" src="https://tamandarett.github.io/codex44/?modo=painel"></iframe>
-            <iframe id="view-lacres" class="view" src="https://tamandarett.github.io/administrador-lacres-maqui/?modo=painel"></iframe>
-            <iframe id="view-caixa" class="view" src="https://tamandarett.github.io/registrodecaixa/?modo=painel"></iframe>
-            <iframe id="view-cadesp" class="view" src="https://www.cadesp.fazenda.sp.gov.br/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx"></iframe>
+            <iframe id="view-pix" class="view" src=""></iframe>
+            <iframe id="view-lacres" class="view" src=""></iframe>
 
         </div>
     </main>
 
-    <script src="scriptv2.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
