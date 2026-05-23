@@ -1,10 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Data Superior
-    const dateDisplay = document.getElementById('date-display');
-    const hoje = new Date();
-    dateDisplay.innerHTML = `<i class="fa-regular fa-calendar"></i> ${hoje.toLocaleDateString('pt-BR')}`;
-
-    // 2. Navegação Lateral
+    // 1. Navegação Lateral
     const navButtons = document.querySelectorAll('.nav-btn');
     const views = document.querySelectorAll('.view');
     const titleDisplay = document.getElementById('current-view-title');
@@ -12,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navButtons.forEach(button => {
         button.addEventListener('click', () => {
             const targetId = button.getAttribute('data-target');
+            
             navButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
@@ -19,17 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetView = document.getElementById(targetId);
             if(targetView) targetView.classList.add('active');
 
-            titleDisplay.innerText = button.innerText.trim();
+            // Mantém o título estático na home, altera nos apps
+            if(targetId === 'view-home') {
+                titleDisplay.innerText = 'Meu Painel';
+            } else {
+                titleDisplay.innerText = button.innerText.trim();
+            }
         });
     });
 
-    // 3. Sistema de Tarefas (LocalStorage)
+    // 2. Sistema de Tarefas (LocalStorage)
     const todoInput = document.getElementById('todo-input');
     const todoList = document.getElementById('todo-list');
     const addTodoBtn = document.getElementById('add-todo-btn');
     const clearBtn = document.getElementById('clear-todos-btn');
 
-    let todos = JSON.parse(localStorage.getItem('tarefas_painel')) || [];
+    let todos = JSON.parse(localStorage.getItem('tarefas_painel_v2')) || [];
 
     function renderTodos() {
         todoList.innerHTML = '';
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function saveTodos() {
-        localStorage.setItem('tarefas_painel', JSON.stringify(todos));
+        localStorage.setItem('tarefas_painel_v2', JSON.stringify(todos));
         renderTodos();
     }
 
