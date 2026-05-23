@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Operações - Tamandaré Tintas</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylev2.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="./logo-tamandare.png" alt="Tamandaré Tintas" onerror="this.style.display='none'">
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="nav-btn active" data-target="view-home">
+                <i class="fa-solid fa-house"></i> Início
+            </button>
+            <button class="nav-btn" data-target="view-pix">
+                <i class="fa-brands fa-pix"></i> Gerador Pix
+            </button>
+            <button class="nav-btn" data-target="view-lacres">
+                <i class="fa-solid fa-stamp"></i> Registro de Lacres
+            </button>
+            <button class="nav-btn" data-target="view-caixa">
+                <i class="fa-solid fa-calculator"></i> Registro de Caixa
+            </button>
+            <button class="nav-btn" data-target="view-cadesp">
+                <i class="fa-solid fa-magnifying-glass"></i> Consulta CADESP
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <img src="./Logo30.png" alt="30 Anos" class="logo-30" onerror="this.style.display='none'">
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-title">
+                <h2 id="current-view-title">Início</h2>
+            </div>
+            <div class="topbar-info">
+                <span id="date-display"><i class="fa-regular fa-calendar"></i> --/--/----</span>
+                <span class="user-profile"><i class="fa-solid fa-circle-user"></i> Junior</span>
+            </div>
+        </header>
+
+        <div class="view-container">
+            
+            <div id="view-home" class="view active home-view">
+                <div class="grid-layout">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-link"></i> Links Externos</h3>
+                        </div>
+                        <ul class="link-list">
+                            <li><a href="https://www.aciai.com.br/" target="_blank">ACIAI</a></li>
+                            <li><a href="https://protestosp.com.br/" target="_blank">CENPROT</a></li>
+                            <li><a href="https://www.sintegra.gov.br/" target="_blank">SINTEGRA</a></li>
+                            <li><a href="https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/cnpjreva_solicitacao.asp" target="_blank">Consulta CNPJ</a></li>
+                            <li><a href="https://banco.bradesco/html/classic/produtos-servicos/mais-produtos-servicos/segunda-via-boleto.shtm" target="_blank">2ª Via Boleto Bradesco</a></li>
+                            <li><a href="https://drive.google.com/drive/folders/1Bb5c4ULT6W4IRfHjOFZsxuY9Czh-lhxM" target="_blank">Docs Diversos</a></li>
+                        </ul>
+                    </div>
+
+                    </div>
+            </div>
+
+            <iframe id="view-pix" class="view" src="https://tamandarett.github.io/codex44/?modo=painel"></iframe>
+            <iframe id="view-lacres" class="view" src="https://tamandarett.github.io/administrador-lacres-maqui/?modo=painel"></iframe>
+            <iframe id="view-caixa" class="view" src="https://tamandarett.github.io/registrodecaixa/?modo=painel"></iframe>
+            <iframe id="view-cadesp" class="view" src="https://www.cadesp.fazenda.sp.gov.br/Pages/Cadastro/Consultas/ConsultaPublica/ConsultaPublica.aspx"></iframe>
+
+        </div>
+    </main>
+
+    <script src="scriptv2.js"></script>
+</body>
+</html>

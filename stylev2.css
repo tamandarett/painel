@@ -1,0 +1,207 @@
+:root {
+    --bg-sidebar: #1e293b;
+    --bg-sidebar-hover: #334155;
+    --bg-main: #f8fafc;
+    --border-color: #e2e8f0;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-light: #f8fafc;
+    --primary-color: #2563eb;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-main);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-sidebar);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-header img {
+    max-width: 180px;
+    height: auto;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 0.95rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 4px solid transparent;
+}
+
+.nav-btn:hover {
+    background-color: var(--bg-sidebar-hover);
+    color: white;
+}
+
+.nav-btn.active {
+    background-color: var(--bg-sidebar-hover);
+    color: white;
+    border-left-color: var(--primary-color);
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo-30 { max-width: 100px; opacity: 0.8; }
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Previne quebra de grid interno */
+}
+
+/* Topbar */
+.topbar {
+    height: 60px;
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.topbar-title h2 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.topbar-info {
+    display: flex;
+    gap: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    align-items: center;
+}
+
+.user-profile {
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* View Container - Onde a mágica acontece */
+.view-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Telas (Iframes e Divs) */
+.view {
+    display: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--bg-main);
+}
+
+.view.active {
+    display: block;
+}
+
+/* Home View Layout */
+.home-view {
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #fcfcfc;
+}
+
+.card-header h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.link-list {
+    list-style: none;
+    padding: 10px 0;
+}
+
+.link-list li {
+    border-bottom: 1px solid #f1f5f9;
+}
+.link-list li:last-child { border: none; }
+
+.link-list a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.link-list a:hover {
+    background-color: #f8fafc;
+    color: var(--primary-color);
+    padding-left: 24px;
+}
