@@ -1,128 +1,81 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Painel - Tamandaré Tintas</title>
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Navegação Lateral
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const views = document.querySelectorAll('.view');
+    const titleDisplay = document.getElementById('current-view-title');
 
-    <div class="top-red-line"></div>
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-target');
+            
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-    <div class="app-layout">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <img src="./logo-tamandare.png" alt="Tamandaré Tintas" onerror="this.style.display='none'">
-            </div>
+            views.forEach(view => view.classList.remove('active'));
+            const targetView = document.getElementById(targetId);
+            if(targetView) targetView.classList.add('active');
 
-            <nav class="sidebar-nav">
-                <button class="nav-btn active" data-target="view-home">
-                    <i class="fa-solid fa-house"></i> Início
-                </button>
-                <button class="nav-btn" data-target="view-pix">
-                    <i class="fa-brands fa-pix"></i> Gerador Pix
-                </button>
-                <button class="nav-btn" data-target="view-lacres">
-                    <i class="fa-solid fa-stamp"></i> Registro de Lacres
-                </button>
-                <button class="nav-btn" data-target="view-agenda">
-                    <i class="fa-regular fa-calendar-days"></i> Agenda
-                </button>
-            </nav>
-        </aside>
+            // Mantém o título estático na home, altera nos apps
+            if(targetId === 'view-home') {
+                titleDisplay.innerText = 'Meu Painel';
+            } else {
+                titleDisplay.innerText = button.innerText.trim();
+            }
+        });
+    });
 
-        <main class="main-content">
-            <header class="topbar">
-                <div class="topbar-title">
-                    <h1 id="current-view-title">Meu Painel</h1>
-                    <span class="subtitle">Atalhos Rápidos</span>
-                </div>
-                <div class="topbar-info">
-                    <span class="user-profile"><i class="fa-solid fa-circle-user"></i> Junior</span>
-                </div>
-            </header>
+    // 2. Sistema de Tarefas (LocalStorage)
+    const todoInput = document.getElementById('todo-input');
+    const todoList = document.getElementById('todo-list');
+    const addTodoBtn = document.getElementById('add-todo-btn');
+    const clearBtn = document.getElementById('clear-todos-btn');
 
-            <div class="view-container">
-                
-                <div id="view-home" class="view active home-view">
-                    <div class="dashboard-grid">
-                        
-                        <div class="card shortcuts-card">
-                            <div class="card-header">
-                                <h2><i class="fa-solid fa-star"></i> Meus Atalhos</h2>
-                            </div>
-                            <div class="card-content">
-                                <ul class="shortcut-grid">
-                                    <li>
-                                        <a href="https://www.aciai.com.br/" target="_blank">
-                                            <i class="fa-solid fa-building"></i>
-                                            <span>ACIAI</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://protestosp.com.br/" target="_blank">
-                                            <i class="fa-solid fa-file-invoice"></i>
-                                            <span>Protesto SP</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://www.sintegra.gov.br/" target="_blank">
-                                            <i class="fa-solid fa-receipt"></i>
-                                            <span>Sintegra</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/cnpjreva_solicitacao.asp" target="_blank">
-                                            <i class="fa-solid fa-id-card"></i>
-                                            <span>Consulta CNPJ</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://banco.bradesco/html/classic/produtos-servicos/mais-produtos-servicos/segunda-via-boleto.shtm" target="_blank">
-                                            <i class="fa-solid fa-barcode"></i>
-                                            <span>2ª Via Boleto</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="https://drive.google.com/drive/folders/1Bb5c4ULT6W4IRfHjOFZsxuY9Czh-lhxM" target="_blank">
-                                            <i class="fa-solid fa-folder-open"></i>
-                                            <span>Docs Diversos</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+    let todos = JSON.parse(localStorage.getItem('tarefas_painel_v2')) || [];
 
-                        <div class="card tasks-card">
-                            <div class="card-header">
-                                <h2><i class="fa-solid fa-list-check"></i> Tarefas</h2>
-                            </div>
-                            <div class="card-content">
-                                <div class="task-input-row">
-                                    <input type="text" id="todo-input" placeholder="Nova tarefa...">
-                                    <button id="add-todo-btn"><i class="fa-solid fa-plus"></i></button>
-                                </div>
-                                <ul id="todo-list" class="task-list"></ul>
-                                <button class="btn-clean" id="clear-todos-btn">Limpar Concluídas</button>
-                            </div>
-                        </div>
+    function renderTodos() {
+        todoList.innerHTML = '';
+        todos.forEach((todo, index) => {
+            const li = document.createElement('li');
+            if (todo.completed) li.classList.add('completed');
+            
+            li.innerHTML = `
+                <input type="checkbox" ${todo.completed ? 'checked' : ''} data-index="${index}">
+                <span>${todo.text}</span>
+            `;
+            todoList.appendChild(li);
+        });
+    }
 
-                    </div>
-                </div>
+    function saveTodos() {
+        localStorage.setItem('tarefas_painel_v2', JSON.stringify(todos));
+        renderTodos();
+    }
 
-                <iframe id="view-pix" class="view" src="./pix/index.html"></iframe>
-                <iframe id="view-lacres" class="view" src="./lacres/index.html"></iframe>
-                
-                <iframe id="view-agenda" class="view" src="https://calendar.google.com/calendar/embed?src=f1c3916472d8e68fcdfc9d16dfbc294e026659b33b8e6c1fe6d3c9fb46f96d32%40group.calendar.google.com&ctz=America%2FSao_Paulo"></iframe>
+    addTodoBtn.addEventListener('click', () => {
+        const text = todoInput.value.trim();
+        if (text) {
+            todos.push({ text, completed: false });
+            todoInput.value = '';
+            saveTodos();
+        }
+    });
 
-            </div>
-        </main>
-    </div>
+    todoInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') addTodoBtn.click();
+    });
 
-    <script src="script.js"></script>
-</body>
-</html>
+    todoList.addEventListener('change', (e) => {
+        if (e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
+            const index = e.target.getAttribute('data-index');
+            todos[index].completed = e.target.checked;
+            saveTodos();
+        }
+    });
+
+    clearBtn.addEventListener('click', () => {
+        todos = todos.filter(todo => !todo.completed);
+        saveTodos();
+    });
+
+    renderTodos();
+});
